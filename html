@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBC Clothing | E-Commerce Store</title>
+  <style>
+    :root {
+      --primary: #1e293b;
+      --accent: #d97706;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--primary);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: white;
+    }
+
+    .cart-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex: 1;
+    }
+
+    .page-title {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #e2e8f0;
+    }
+
+    .card-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart-btn {
+      margin-top: auto;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .add-to-cart-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Checkout & Orders Page */
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .cart-summary {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+      height: fit-content;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--border);
+    }
+
+    .submit-order-btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    /* Order Confirmation */
+    .success-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid var(--border);
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a class="brand" onclick="switchPage('male')">NBC <span>CLOTHING</span></a>
+      <nav>
+        <ul>
+          <li><a id="nav-male" class="active" onclick="switchPage('male')">Men</a></li>
+          <li><a id="nav-female" onclick="switchPage('female')">Women</a></li>
+        </ul>
+      </nav>
+      <button class="cart-btn" onclick="switchPage('checkout')">
+        Cart (<span id="cart-count">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Male Section -->
+    <section id="page-male">
+      <h2 class="page-title">Men's Collection</h2>
+      <div class="products-grid" id="male-products"></div>
+    </section>
+
+    <!-- Female Section -->
+    <section id="page-female" class="hidden">
+      <h2 class="page-title">Women's Collection</h2>
+      <div class="products-grid" id="female-products"></div>
+    </section>
+
+    <!-- Order & Checkout Section -->
+    <section id="page-checkout" class="hidden">
+      <h2 class="page-title">Complete Your Order</h2>
+      <div class="checkout-container">
+        
+        <!-- Shipping Details -->
+        <div>
+          <form id="checkout-form" onsubmit="handleCheckout(event)">
+            <h3>1. Shipping Details</h3>
+            <br>
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" required placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label for="address">Shipping Address</label>
+              <input type="text" id="address" required placeholder="123 Main St">
+            </div>
+
+            <br>
+            <h3>2. Payment Details</h3>
+            <br>
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" required placeholder="1234 5678 9101 1121">
+            </div>
+            <div style="display: flex; gap: 1rem;">
+              <div class="form-group" style="flex: 1;">
+                <label for="exp">Expiry</label>
+                <input type="text" id="exp" required placeholder="MM/YY">
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" required placeholder="123">
+              </div>
+            </div>
+
+            <button type="submit" class="submit-order-btn">Place Order</button>
+          </form>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+          <h3>Order Summary</h3>
+          <div id="cart-items-list"></div>
+          <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-price">$0.00</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Confirmation Page -->
+    <section id="page-success" class="hidden">
+      <div class="success-box">
+        <h2 style="color: #16a34a; margin-bottom: 0.5rem;">Order Placed!</h2>
+        <p>Thank you for shopping with <strong>NBC Clothing</strong>. Your order has been placed successfully.</p>
+        <br>
+        <button class="add-to-cart-btn" onclick="switchPage('male')">Continue Shopping</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Product Catalog Data
+    const products = [
+      { id: 1, name: "NBC Classic Black Hoodie", price: 55, category: "male", image: "https://via.placeholder.com/300x300?text=Mens+Hoodie" },
+      { id: 2, name: "Slim Fit Casual Shirt", price: 40, category: "male", image: "https://via.placeholder.com/300x300?text=Mens+Shirt" },
+      { id: 3, name: "Urban Denim Jacket", price: 85, category: "male", image: "https://via.placeholder.com/300x300?text=Mens+Jacket" },
+      { id: 4, name: "NBC Oversized Sweatshirt", price: 50, category: "female", image: "https://via.placeholder.com/300x300?text=Womens+Sweatshirt" },
+      { id: 5, name: "Floral Summer Dress", price: 65, category: "female", image: "https://via.placeholder.com/300x300?text=Womens+Dress" },
+      { id: 6, name: "Tailored Blazer", price: 95, category: "female", image: "https://via.placeholder.com/300x300?text=Womens+Blazer" }
+    ];
+
+    let cart = [];
+
+    // Initialize Products
+    function renderProducts() {
+      const maleContainer = document.getElementById('male-products');
+      const femaleContainer = document.getElementById('female-products');
+
+      maleContainer.innerHTML = '';
+      femaleContainer.innerHTML = '';
+
+      products.forEach(product => {
+        const productHtml = `
+          <div class="card">
+            <img src="${product.image}" class="card-img" alt="${product.name}">
+            <div class="card-body">
+              <div class="card-title">${product.name}</div>
+              <div class="card-price">$${product.price.toFixed(2)}</div>
+              <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+          </div>
+        `;
+
+        if (product.category === 'male') {
+          maleContainer.innerHTML += productHtml;
+        } else {
+          femaleContainer.innerHTML += productHtml;
+        }
+      });
+    }
+
+    // Navigation Handler
+    function switchPage(page) {
+      const pages = ['male', 'female', 'checkout', 'success'];
+      pages.forEach(p => {
+        document.getElementById(`page-${p}`).classList.add('hidden');
+        const navItem = document.getElementById(`nav-${p}`);
+        if (navItem) navItem.classList.remove('active');
+      });
+
+      document.getElementById(`page-${page}`).classList.remove('hidden');
+      const activeNav = document.getElementById(`nav-${page}`);
+      if (activeNav) activeNav.classList.add('active');
+
+      if (page === 'checkout') {
+        renderCart();
+      }
+    }
+
+    // Cart Management
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      cart.push(product);
+      updateCartCount();
+      alert(`${product.name} added to cart!`);
+    }
+
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function renderCart() {
+      const listContainer = document.getElementById('cart-items-list');
+      const totalContainer = document.getElementById('cart-total-price');
+      listContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        listContainer.innerHTML = '<p style="color: var(--text-muted);">Your cart is empty.</p>';
+        totalContainer.textContent = '$0.00';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        listContainer.innerHTML += `
+          <div class="cart-item">
+            <div>
+              <strong>${item.name}</strong>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">$${item.price.toFixed(2)}</div>
+            </div>
+            <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer;">Remove</button>
+          </div>
+        `;
+      });
+
+      totalContainer.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartCount();
+      renderCart();
+    }
+
+    // Form Submission
+    function handleCheckout(event) {
+      event.preventDefault();
+      if (cart.length === 0) {
+        alert("Your cart is empty. Please add items before placing an order.");
+        return;
+      }
+      cart = [];
+      updateCartCount();
+      document.getElementById('checkout-form').reset();
+      switchPage('success');
+    }
+
+    // Initial Setup
+    renderProducts();
+  </script>
+</body>
+</html>
