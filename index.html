@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NBC Clothing</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                NBC <span>Clothing</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="men.html">Men</a></li>
+                <li><a href="women.html">Women</a></li>
+                <li><a href="cart.html">Cart 🛒</a></li>
+            </ul>
+
+            <div class="nav-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="register.html" class="register-btn">Register</a>
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Style That Defines You</h1>
+
+            <p>
+                Discover the latest fashion for men and women
+                at NBC Clothing.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="men.html" class="shop-btn">Shop Men</a>
+                <a href="women.html" class="shop-btn secondary">Shop Women</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Categories -->
+    <section class="categories">
+
+        <h2>Shop By Category</h2>
+
+        <div class="category-container">
+
+            <div class="category-card">
+                <div class="category-image men-image"></div>
+                <h3>Men's Clothing</h3>
+                <a href="men.html">Shop Men →</a>
+            </div>
+
+            <div class="category-card">
+                <div class="category-image women-image"></div>
+                <h3>Women's Clothing</h3>
+                <a href="women.html">Shop Women →</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Featured Products -->
+    <section class="products">
+
+        <h2>Featured Products</h2>
+
+        <div class="product-container">
+
+            <div class="product-card">
+                <div class="product-image"></div>
+
+                <h3>Classic T-Shirt</h3>
+
+                <p class="price">₦15,000</p>
+
+                <button onclick="addToCart('Classic T-Shirt', 15000)">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image"></div>
+
+                <h3>Premium Shirt</h3>
+
+                <p class="price">₦25,000</p>
+
+                <button onclick="addToCart('Premium Shirt', 25000)">
+                    Add to Cart
+                </button>
+            </div>
+
+
+            <div class="product-card">
+                <div class="product-image"></div>
+
+                <h3>Women's Dress</h3>
+
+                <p class="price">₦30,000</p>
+
+                <button onclick="addToCart('Women's Dress', 30000)">
+                    Add to Cart
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about">
+
+        <h2>Why NBC Clothing?</h2>
+
+        <div class="features">
+
+            <div>
+                <h3>Quality</h3>
+                <p>Quality clothing designed for comfort and style.</p>
+            </div>
+
+            <div>
+                <h3>Affordable</h3>
+                <p>Fashionable products at competitive prices.</p>
+            </div>
+
+            <div>
+                <h3>Fast Delivery</h3>
+                <p>Get your orders delivered conveniently.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-content">
+
+            <h2>NBC Clothing</h2>
+
+            <p>Your style. Your choice.</p>
+
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="men.html">Men</a>
+                <a href="women.html">Women</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Login</a>
+            </div>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 NBC Clothing. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
